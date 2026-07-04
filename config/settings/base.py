@@ -3,6 +3,7 @@
 
 import ssl
 from pathlib import Path
+from decouple import config
 
 import environ
 
@@ -39,6 +40,7 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
+<<<<<<< HEAD
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -48,7 +50,27 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT", default="5432"),
     }
+=======
+
+# DATABASES = {
+#     "default": env.db(
+#         "DATABASE_URL",
+#         default="postgres://commerce:commerce237@localhost:5432/e_commerce_app",
+#     ),
+# }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DB"),
+        "USER": config("POSTGRES_USER"),
+        "PASSWORD": config("POSTGRES_PASSWORD"),
+        "HOST": config("POSTGRES_HOST"),
+        "PORT": config("POSTGRES_PORT", cast=int),
+    },
+>>>>>>> 57be50cc6a818478e17ca3b3312f82602017e000
 }
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
