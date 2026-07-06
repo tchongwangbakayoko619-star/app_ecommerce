@@ -2,6 +2,7 @@
 """Base settings to build other settings files upon."""
 
 import ssl
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -39,27 +40,16 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
-
-# DATABASES = {
-#     "default": env.db(
-#         "DATABASE_URL",
-#         default="postgres://commerce:commerce237@localhost:5432/e_commerce_app",
-#     ),
-# }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("POSTGRES_DB"),
-        "USER": config("POSTGRES_USER"),
-        "PASSWORD": config("POSTGRES_PASSWORD"),
-        "HOST": config("POSTGRES_HOST"),
-        "PORT": config("POSTGRES_PORT", cast=int),
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env("POSTGRES_PORT", default="5432"),
     },
-
 }
-
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -80,7 +70,6 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.forms",
-    
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -94,7 +83,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
-    "rest_framework_simplejwt.token_blacklist",   # necessaire pour le logout (blacklist)
+    "rest_framework_simplejwt.token_blacklist",  # necessaire pour le logout (blacklist)
     "corsheaders",
     "drf_spectacular",
     "dj_rest_auth",
@@ -209,6 +198,12 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
+EMAIL_HOST = env("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER)
 EMAIL_TIMEOUT = 5
 
 # ADMIN
@@ -277,8 +272,6 @@ SOCIALACCOUNT_FORMS = {"signup": "e_commerce_app.users.forms.UserSocialSignupFor
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
-# django-rest-framework — activer JWT en plus de la session
-# ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -287,8 +280,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
-
-from datetime import timedelta  # noqa: E402
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -322,9 +313,12 @@ SOCIALACCOUNT_PROVIDERS = {
             "secret": env("GOOGLE_OAUTH_CLIENT_SECRET", default=""),
             "key": "",
         },
-    }
+    },
 }
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# django-cors-headers
+# ------------------------------------------------------------------------------
 CORS_URLS_REGEX = r"^/api/.*$"
 
 SPECTACULAR_SETTINGS = {
@@ -335,4 +329,4 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/",
 }
 # Your stuff...
-# ------------------------------------------------------------------------------
+# --------------------------------------
