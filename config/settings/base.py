@@ -3,7 +3,6 @@
 
 import ssl
 from pathlib import Path
-from decouple import config
 
 import environ
 
@@ -40,19 +39,7 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-HEAD
-# configuration de base.py pour la configuration de la connexion a la BD
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("POSTGRES_HOST"),
-        "PORT": env("POSTGRES_PORT", default="5432"),
-    }
 
-}
 
 # DATABASES = {
 #     "default": env.db(
@@ -227,7 +214,9 @@ EMAIL_TIMEOUT = 5
 # ADMIN
 # ------------------------------------------------------------------------------
 ADMIN_URL = "admin/"
-ADMINS = ['"tchongwang bakayoko" <tchongwangbakayoko619@gmail.com>']
+ADMINS = [
+    ("Tchongwang Bakayoko", "tchongwangbakayoko619@gmail.com"),
+]
 MANAGERS = ADMINS
 DJANGO_ADMIN_FORCE_ALLAUTH = env.bool("DJANGO_ADMIN_FORCE_ALLAUTH", default=False)
 
