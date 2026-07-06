@@ -46,7 +46,7 @@ urlpatterns += [
         SpectacularSwaggerView.as_view(url_name="api-schema"),
         name="api-docs",
     ),
-    # Authentification (dj-rest-auth + JWT + Google)
+    # --- Authentification (dj-rest-auth, JWT, Google) ---
     path("api/auth/", include("dj_rest_auth.urls")),
     path("api/auth/registration/", include("dj_rest_auth.registration.urls")),
     path("api/auth/google/", GoogleLogin.as_view(), name="google_login"),

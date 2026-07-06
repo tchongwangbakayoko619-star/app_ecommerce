@@ -15,7 +15,12 @@ class User(AbstractUser):
     last_name = None  # type: ignore[assignment]
 
     phone = CharField(_("Telephone"), max_length=30, blank=True)
-    role = CharField(_("Role"), max_length=10, choices=Role.choices, default=Role.CLIENT)
+    role = CharField(
+        _("Role"),
+        max_length=10,
+        choices=Role.choices,
+        default=Role.CLIENT,
+    )
 
     def get_absolute_url(self) -> str:
         return reverse("users:detail", kwargs={"username": self.username})

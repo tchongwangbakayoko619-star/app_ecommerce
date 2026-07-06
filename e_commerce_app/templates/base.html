@@ -1,4 +1,6 @@
-{% load static i18n %}<!DOCTYPE html>
+{% load static i18n %}
+
+<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
@@ -6,228 +8,262 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>
       {% block title %}
-      CamerCommerce
-    {% endblock title %}
-  </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="CamerCommerce — votre marche en ligne au Cameroun" />
-  <meta name="author"
-        content="tchongwang bakayoko" />
-  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-  {% block css %}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
-          integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        CamerCommerce
+      {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="CamerCommerce — votre marche en ligne au Cameroun" />
+    <meta name="author" content="tchongwang bakayoko" />
+    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+    {% block css %}
+      <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+            integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet" />
+      <style>
+        :root {
+          --ink: #16241C;
+          --canvas: #FBF9F4;
+          --forest: #1C6B48;
+          --forest-dark: #124A32;
+          --sunflower: #F2B705;
+          --ember: #C6362B;
+          --line: #E1DBC9;
+        }
 
-    <style>
-      :root {
-        --ink: #16241C;
-        --canvas: #FBF9F4;
-        --forest: #1C6B48;
-        --forest-dark: #124A32;
-        --sunflower: #F2B705;
-        --ember: #C6362B;
-        --line: #E1DBC9;
-      }
+        body {
+          background-color: var(--canvas);
+          color: var(--ink);
+          font-family: 'Inter', sans-serif;
+        }
 
-      body {
-        background-color: var(--canvas);
-        color: var(--ink);
-        font-family: 'Inter', sans-serif;
-      }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .navbar-brand,
+        .btn {
+          font-family: 'Bricolage Grotesque', sans-serif;
+        }
 
-      h1, h2, h3, h4, h5, h6,
-      .navbar-brand, .btn {
-        font-family: 'Bricolage Grotesque', sans-serif;
-      }
+        /* ---------- En-tete ---------- */
+        .site-header {
+          background: var(--canvas);
+          border-bottom: 1px solid var(--line);
+        }
 
-      /* ---------- En-tete ---------- */
-      .site-header {
-        background: var(--canvas);
-        border-bottom: 1px solid var(--line);
-      }
+        .brand-mark {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          text-decoration: none;
+        }
 
-      .brand-mark {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        text-decoration: none;
-      }
+        .brand-mark svg {
+          flex-shrink: 0;
+        }
 
-      .brand-mark svg { flex-shrink: 0; }
+        .brand-wordmark {
+          font-weight: 700;
+          font-size: 1.25rem;
+          letter-spacing: -0.01em;
+          color: var(--ink);
+        }
 
-      .brand-wordmark {
-        font-weight: 700;
-        font-size: 1.25rem;
-        letter-spacing: -0.01em;
-        color: var(--ink);
-      }
-      .brand-wordmark .accent { color: var(--forest); }
-      .brand-wordmark .dot { color: var(--sunflower); }
+        .brand-wordmark .accent {
+          color: var(--forest);
+        }
 
-      .site-header .nav-link {
-        color: var(--ink);
-        font-weight: 500;
-        padding: 0.5rem 0.9rem !important;
-        border-radius: 8px;
-        transition: background-color 0.15s ease, color 0.15s ease;
-      }
-      .site-header .nav-link:hover {
-        background-color: rgba(28, 107, 72, 0.08);
-        color: var(--forest-dark);
-      }
-      .site-header .navbar-toggler {
-        border-color: var(--line);
-      }
+        .brand-wordmark .dot {
+          color: var(--sunflower);
+        }
 
-      #sign-up-link {
-        background-color: var(--forest);
-        color: #fff !important;
-        margin-left: 0.25rem;
-      }
-      #sign-up-link:hover { background-color: var(--forest-dark); }
+        .site-header .nav-link {
+          color: var(--ink);
+          font-weight: 500;
+          padding: 0.5rem 0.9rem !important;
+          border-radius: 8px;
+          transition: background-color 0.15s ease, color 0.15s ease;
+        }
 
-      /* ---------- Boutons ---------- */
-      .btn-primary {
-        --bs-btn-bg: var(--forest);
-        --bs-btn-border-color: var(--forest);
-        --bs-btn-hover-bg: var(--forest-dark);
-        --bs-btn-hover-border-color: var(--forest-dark);
-        --bs-btn-active-bg: var(--forest-dark);
-        --bs-btn-active-border-color: var(--forest-dark);
-        --bs-btn-focus-shadow-rgb: 28, 107, 72;
-        font-weight: 600;
-      }
+        .site-header .nav-link:hover {
+          background-color: rgba(28, 107, 72, 0.08);
+          color: var(--forest-dark);
+        }
 
-      .btn-warning {
-        --bs-btn-bg: var(--sunflower);
-        --bs-btn-border-color: var(--sunflower);
-        --bs-btn-color: var(--ink);
-        --bs-btn-hover-bg: #D9A400;
-        --bs-btn-hover-border-color: #D9A400;
-        --bs-btn-hover-color: var(--ink);
-        font-weight: 600;
-      }
+        .site-header .navbar-toggler {
+          border-color: var(--line);
+        }
 
-      a { color: var(--forest); }
-      a:hover { color: var(--forest-dark); }
+        #sign-up-link {
+          background-color: var(--forest);
+          color: #fff !important;
+          margin-left: 0.25rem;
+        }
 
-      /* ---------- Alertes ---------- */
-      .alert-success { background-color: rgba(28,107,72,0.10); border-color: var(--forest); color: var(--forest-dark); }
-      .alert-danger  { background-color: rgba(198,54,43,0.10); border-color: var(--ember); color: var(--ember); }
-      .alert-warning { background-color: rgba(242,183,5,0.14); border-color: var(--sunflower); color: #8A6600; }
+        #sign-up-link:hover {
+          background-color: var(--forest-dark);
+        }
 
-      /* ---------- Pied de page ---------- */
-      .site-footer {
-        border-top: 1px solid var(--line);
-        color: #6B7566;
-        font-size: 0.875rem;
-        padding: 2rem 0;
-        margin-top: 3rem;
-      }
-    </style>
+        /* ---------- Boutons ---------- */
+        .btn-primary {
+          --bs-btn-bg: var(--forest);
+          --bs-btn-border-color: var(--forest);
+          --bs-btn-hover-bg: var(--forest-dark);
+          --bs-btn-hover-border-color: var(--forest-dark);
+          --bs-btn-active-bg: var(--forest-dark);
+          --bs-btn-active-border-color: var(--forest-dark);
+          --bs-btn-focus-shadow-rgb: 28, 107, 72;
+          font-weight: 600;
+        }
 
-    <link href="{% static 'css/project.css' %}" rel="stylesheet" />
-  {% endblock css %}
+        .btn-warning {
+          --bs-btn-bg: var(--sunflower);
+          --bs-btn-border-color: var(--sunflower);
+          --bs-btn-color: var(--ink);
+          --bs-btn-hover-bg: #D9A400;
+          --bs-btn-hover-border-color: #D9A400;
+          --bs-btn-hover-color: var(--ink);
+          font-weight: 600;
+        }
 
-{% block javascript %}
-<script defer
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
-        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"></script>
-<script defer src="{% static 'js/project.js' %}"></script>
-{% endblock javascript %}
-</head>
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
-  {% block body %}
-  <div class="mb-1">
-    <nav class="navbar navbar-expand-md site-header">
-      <div class="container-fluid">
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        a {
+          color: var(--forest);
+        }
 
-        <a class="navbar-brand brand-mark" href="{% url 'home' %}">
-          <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10 18L14 42H34L38 18H10Z" fill="#1C6B48"/>
-            <path d="M15 18C15 11.9249 19.0294 7 24 7C28.9706 7 33 11.9249 33 18" stroke="#1C6B48" stroke-width="3" stroke-linecap="round"/>
-            <path d="M24 22L25.7063 27.2918H31.2695L26.7816 30.5164L28.4879 35.8082L24 32.5836L19.5121 35.8082L21.2184 30.5164L16.7305 27.2918H22.2937L24 22Z" fill="#F2B705"/>
-          </svg>
-          <span class="brand-wordmark">Camer<span class="accent">Commerce</span><span class="dot">.</span></span>
-        </a>
+        a:hover {
+          color: var(--forest-dark);
+        }
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">{% translate "Accueil" %}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">{% translate "A propos" %}</a>
-            </li>
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="{% url 'users:detail' request.user.username %}">{% translate "Mon profil" %}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Deconnexion" %}</a>
-              </li>
-            {% else %}
-              {% if ACCOUNT_ALLOW_REGISTRATION %}
-                <li class="nav-item">
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Inscription" %}</a>
+        /* ---------- Alertes ---------- */
+        .alert-success {
+          background-color: rgba(28, 107, 72, 0.10);
+          border-color: var(--forest);
+          color: var(--forest-dark);
+        }
+
+        .alert-danger {
+          background-color: rgba(198, 54, 43, 0.10);
+          border-color: var(--ember);
+          color: var(--ember);
+        }
+
+        .alert-warning {
+          background-color: rgba(242, 183, 5, 0.14);
+          border-color: var(--sunflower);
+          color: #8A6600;
+        }
+
+        /* ---------- Pied de page ---------- */
+        .site-footer {
+          border-top: 1px solid var(--line);
+          color: #6B7566;
+          font-size: 0.875rem;
+          padding: 2rem 0;
+          margin-top: 3rem;
+        }
+      </style>
+      <link href="{% static 'css/project.css' %}" rel="stylesheet" />
+    {% endblock css %}
+    {% block javascript %}
+      <script defer
+              src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+              integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"></script>
+      <script defer src="{% static 'js/project.js' %}"></script>
+    {% endblock javascript %}
+  </head>
+  <body class="{% block bodyclass %}{% endblock bodyclass %}">
+    {% block body %}
+      <div class="mb-1">
+        <nav class="navbar navbar-expand-md site-header">
+          <div class="container-fluid">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand brand-mark" href="{% url 'home' %}">
+              <svg width="36"
+                   height="36"
+                   viewBox="0 0 48 48"
+                   fill="none"
+                   xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <path d="M10 18L14 42H34L38 18H10Z" fill="#1C6B48" />
+                <path d="M15 18C15 11.9249 19.0294 7 24 7C28.9706 7 33 11.9249 33 18" stroke="#1C6B48" stroke-width="3" stroke-linecap="round" />
+                <path d="M24 22L25.7063 27.2918H31.2695L26.7816 30.5164L28.4879 35.8082L24 32.5836L19.5121 35.8082L21.2184 30.5164L16.7305 27.2918H22.2937L24 22Z" fill="#F2B705" />
+              </svg>
+              <span class="brand-wordmark">Camer<span class="accent">Commerce</span><span class="dot">.</span></span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'home' %}">{% translate "Accueil" %}</a>
                 </li>
-              {% endif %}
-              <li class="nav-item">
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Connexion" %}</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">{% translate "A propos" %}</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link"
+                       href="{% url 'users:detail' request.user.username %}">{% translate "Mon profil" %}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Deconnexion" %}</a>
+                  </li>
+                {% else %}
+                  {% if ACCOUNT_ALLOW_REGISTRATION %}
+                    <li class="nav-item">
+                      <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Inscription" %}</a>
+                    </li>
+                  {% endif %}
+                  <li class="nav-item">
+                    <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Connexion" %}</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
-    </nav>
-  </div>
-
-  <div class="container">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-          {{ message }}
-          <button type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-    {% block main %}
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-    {% endblock main %}
-  </div>
-
-  <footer class="site-footer text-center">
-    &copy; {% now "Y" %} CamerCommerce — Votre marche en ligne au Cameroun
-  </footer>
-  {% endblock body %}
-
-  {% block modal %}
-  {% endblock modal %}
-  {% block inline_javascript %}
-  {% endblock inline_javascript %}
-</body>
+      <div class="container">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+              {{ message }}
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block main %}
+          {% block content %}
+            <p>Use this document as a way to quick start any new project.</p>
+          {% endblock content %}
+        {% endblock main %}
+      </div>
+      <footer class="site-footer text-center">© {% now "Y" %} CamerCommerce — Votre marche en ligne au Cameroun
+      </footer>
+    {% endblock body %}
+    {% block modal %}
+    {% endblock modal %}
+    {% block inline_javascript %}
+    {% endblock inline_javascript %}
+  </body>
 </html>
