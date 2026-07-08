@@ -9,7 +9,7 @@ creation complete d'une application web de e-commerce
 
 Moved to [settings](https://cookiecutter-django.readthedocs.io/en/latest/1-getting-started/settings.html).
 
-## Basic Commands 
+## Basic Commands
 
 ### Setting Up Your Users
 
