@@ -1,0 +1,12 @@
+{% load i18n %}{% autoescape off %}{% blocktranslate %}Bonjour,
+
+Merci de vous etre inscrit sur CamerCommerce !
+
+Pour confirmer votre adresse email et activer votre compte, cliquez sur le lien ci-dessous :
+
+{{ activate_url }}
+
+Si vous n'etes pas a l'origine de cette inscription, vous pouvez ignorer cet email en toute securite.
+
+A tres vite sur CamerCommerce !
+L'equipe CamerCommerce{% endblocktranslate %}{% endautoescape %}

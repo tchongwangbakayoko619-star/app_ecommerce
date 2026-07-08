@@ -10,6 +10,8 @@ from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from e_commerce_app.users.api.email_views import ConfirmEmailRedirectView
+from e_commerce_app.users.api.email_views import EmailVerificationSentRedirectView
 from e_commerce_app.users.api.google_views import GoogleLogin
 
 urlpatterns = [
@@ -47,6 +49,18 @@ urlpatterns += [
         name="api-docs",
     ),
     # --- Authentification (dj-rest-auth, JWT, Google) ---
+    # Ces deux routes doivent rester AVANT l'include de dj_rest_auth.registration.urls
+    # pour prendre le dessus sur les vues HTML par defaut (sans template).
+    path(
+        "api/auth/registration/account-confirm-email/<str:key>/",
+        ConfirmEmailRedirectView.as_view(),
+        name="account_confirm_email",
+    ),
+    path(
+        "api/auth/registration/account-email-verification-sent/",
+        EmailVerificationSentRedirectView.as_view(),
+        name="account_email_verification_sent",
+    ),
     path("api/auth/", include("dj_rest_auth.urls")),
     path("api/auth/registration/", include("dj_rest_auth.registration.urls")),
     path("api/auth/google/", GoogleLogin.as_view(), name="google_login"),

@@ -259,6 +259,9 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 ACCOUNT_LOGIN_METHODS = {"username"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_EMAIL_VERIFICATION = (
+    "none"  # Google verifie deja l'email, pas besoin de redemander
+)
 ACCOUNT_ADAPTER = "e_commerce_app.users.adapters.AccountAdapter"
 ACCOUNT_FORMS = {"signup": "e_commerce_app.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "e_commerce_app.users.adapters.SocialAccountAdapter"
