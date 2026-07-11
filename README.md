@@ -1,4 +1,4 @@
-# se_commerce_app
+# se_commerce_app application web de e_commerce
 
 creation complete d'une application web de e-commerce
 
